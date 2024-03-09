@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Console extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name', 'developer', 'release_year', 'stock', 'price'
+    ];
 }

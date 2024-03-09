@@ -9,6 +9,10 @@ class Game extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'developer', 'release_year', 'stock', 'price'
+    ];
+
     public function genre()
     {
         return $this->belongsToMany(Genre::class);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->foreignId('role_id')->constrained();
             $table->string('bio')->nullable();
-            $table->string('profile_picture')->nullable();
+            $table->string('profile_picture_path')->nullable();
             $table->timestamps();
         });
     }

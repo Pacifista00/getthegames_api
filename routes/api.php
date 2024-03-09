@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// auth
+Route::post('/register', [AuthenticationController::class, 'register']);
+Route::post('/login', [AuthenticationController::class, 'login']);
+
+// logged user
+Route::middleware(['auth:sanctum'])->group(function () {
+    // only admin
+    Route::middleware(['admin'])->group(function () {
+
+    });
+
+    // logout
+    Route::post('/logout', [AuthenticationController::class, 'logout']);
+});
