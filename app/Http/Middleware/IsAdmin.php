@@ -15,7 +15,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()->role_id == 1) {
+        if ($request->user()->role_id != 1) {
             return response()->json([
                 "data" => [
                     "message" => "Only admin can access this route!"

@@ -24,15 +24,15 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
     // only admin
     Route::middleware(['admin'])->group(function () {
-
+        Route::post('/console/add', [ConsoleController::class, 'store']);
+        Route::patch('/console/{id}/update', [ConsoleController::class, 'update']);
+        Route::delete('/console/{id}/delete', [ConsoleController::class, 'destroy']);
     });
 
+    // admin & user
+    Route::get('/consoles', [ConsoleController::class, 'show']);
 
-    
     // logout
     Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
-Route::get('/consoles', [ConsoleController::class, 'show']);
-Route::post('/console/add', [ConsoleController::class, 'store']);
-Route::patch('/console/{id}/update', [ConsoleController::class, 'update']);
-Route::delete('/console/{id}/delete', [ConsoleController::class, 'destroy']);
+
