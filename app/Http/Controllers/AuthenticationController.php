@@ -10,7 +10,7 @@ class AuthenticationController extends Controller
 {
     public function register(Request $request){
         $request->validate([
-            'username' => 'required|unique:users|max:16',
+            'username' => 'required|unique:users|max:24',
             'email' => 'required|unique:users',
             'password' => 'required',
             'password_confirm' => 'required|same:password'
