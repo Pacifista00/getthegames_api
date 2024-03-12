@@ -17,4 +17,8 @@ class Game extends Model
     {
         return $this->belongsToMany(Genre::class);
     }
+    public function basket()
+    {
+        return $this->morphMany(Basket::class, 'product');
+    }
 }

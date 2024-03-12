@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Console extends Model
+class Basket extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'developer', 'release_year', 'stock', 'price'
+        'user_id', 'product_id', 'product_type', 'quantity'
     ];
-    public function basket()
+
+    public function product()
     {
-        return $this->morphMany(Basket::class, 'product');
+        return $this->morphTo();
     }
 }
