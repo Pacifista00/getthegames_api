@@ -21,4 +21,8 @@ class Game extends Model
     {
         return $this->morphMany(Basket::class, 'product');
     }
+    public function console()
+    {
+        return $this->belongsTo(Console::class);
+    }
 }

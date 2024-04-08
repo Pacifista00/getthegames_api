@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('developer');
             $table->string('release_year');
+            $table->string('description');
             $table->integer('stock');
             $table->integer('price');
             $table->timestamps();

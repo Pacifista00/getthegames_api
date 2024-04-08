@@ -16,4 +16,8 @@ class Console extends Model
     {
         return $this->morphMany(Basket::class, 'product');
     }
+    public function game()
+    {
+        return $this->HasMany(Game::class);
+    }
 }
