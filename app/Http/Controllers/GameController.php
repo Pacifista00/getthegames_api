@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Game;
+use Illuminate\Support\Facades\Storage;
 
 class GameController extends Controller
 {
@@ -16,16 +17,22 @@ class GameController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => 'required|unique:games',
-            'developer' => 'required',
+            'image' => 'required|image|file|max:1024',
+            'publisher' => 'required',
+            'description' => 'required',
             'release_year' => 'required|integer',
+            'console_id' => 'required|integer|exists:consoles,id',
             'stock' => 'required|integer',
             'price' => 'required|integer'
         ]);
 
         Game::create([
             'name' => $request->name,
-            'developer' => $request->developer,
+            'image_path' => $request->file('image')->store('game_images'),
+            'description' => $request->description,
+            'publisher' => $request->publisher,
             'release_year' => $request->release_year,
+            'console_id' => $request->console_id,
             'stock' => $request->stock,
             'price' => $request->price,
         ]);
@@ -39,9 +46,12 @@ class GameController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'name' => 'required|unique:games',
-            'developer' => 'required',
+            'name' => 'required',
+            'image' => 'image|file|max:1024',
+            'publisher' => 'required',
+            'description' => 'required',
             'release_year' => 'required|integer',
+            'console_id' => 'required|integer|exists:consoles,id',
             'stock' => 'required|integer',
             'price' => 'required|integer'
         ]);
@@ -55,13 +65,24 @@ class GameController extends Controller
             ]);
         }
 
-        $game->update([
+        $dataRequest =  [
             'name' => $request->name,
-            'developer' => $request->developer,
+            'publisher' => $request->publisher,
+            'description' => $request->description,
             'release_year' => $request->release_year,
+            'console_id' => $request->console_id,
             'stock' => $request->stock,
             'price' => $request->price,
-        ]);
+        ];
+
+        if(!$request->hasFile('image')){
+            $dataRequest['image_path'] = $game->image_path;
+        }else{
+            Storage::delete($game->image_path);
+            $dataRequest['image_path'] = $request->file('image')->store('game_images');
+        }
+
+        $game->update($dataRequest);
 
         return response()->json([
             "data" => [
@@ -74,6 +95,7 @@ class GameController extends Controller
         $game = Game::find($id);
 
         if ($game) {
+            Storage::delete($game->image_path);
             $game->delete();
             return response()->json([
                 "data" => [

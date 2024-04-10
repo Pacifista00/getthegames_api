@@ -10,7 +10,7 @@ class Game extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'developer', 'release_year', 'stock', 'price'
+        'name', 'image_path', 'publisher', 'release_year', 'description', 'console_id', 'stock', 'price'
     ];
 
     public function genre()

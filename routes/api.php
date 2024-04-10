@@ -29,12 +29,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         // console
         Route::post('/console/add', [ConsoleController::class, 'store']);
-        Route::patch('/console/{id}/update', [ConsoleController::class, 'update']);
+        Route::post('/console/{id}/update', [ConsoleController::class, 'update']);
         Route::delete('/console/{id}/delete', [ConsoleController::class, 'destroy']);
 
         // game
         Route::post('/game/add', [GameController::class, 'store']);
-        Route::patch('/game/{id}/update', [GameController::class, 'update']);
+        Route::post('/game/{id}/update', [GameController::class, 'update']);
         Route::delete('/game/{id}/delete', [GameController::class, 'destroy']);
 
         // genre

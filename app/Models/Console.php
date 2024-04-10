@@ -10,7 +10,7 @@ class Console extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'developer', 'release_year', 'stock', 'price'
+        'name', 'image_path', 'description', 'developer', 'release_year', 'stock', 'price'
     ];
     public function basket()
     {
@@ -18,6 +18,6 @@ class Console extends Model
     }
     public function game()
     {
-        return $this->HasMany(Game::class);
+        return $this->hasMany(Game::class);
     }
 }

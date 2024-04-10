@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image_path');
             $table->string('publisher');
             $table->string('release_year');
             $table->foreignId('console_id')->constrained();
