@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Genre;
+use App\Http\Resources\GenreResource;
 
 class GenreController extends Controller
 {
     public function show(){
+        $genres = GenreResource::collection(Genre::all());
         return response()->json([
-            "data" => Genre::all()
+            "data" => $genres
         ]);
     }
 

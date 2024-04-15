@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Console;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\ConsoleResource;
 
 class ConsoleController extends Controller
 {
     public function show(){
+        $consoles = ConsoleResource::collection(Console::all());
         return response()->json([
-            "data" => Console::all()
+            "data" => $consoles
         ]);
     }
 

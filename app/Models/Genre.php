@@ -15,6 +15,6 @@ class Genre extends Model
 
     public function games()
     {
-        return $this->belongsToMany(Game::class);
+        return $this->belongsToMany(Game::class, 'game_genres')->withTimeStamps();
     }
 }

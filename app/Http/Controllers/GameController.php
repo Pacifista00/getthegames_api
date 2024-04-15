@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\GameResource;
 
 class GameController extends Controller
 {
     public function show(){
+        $games = GameResource::collection(Game::all());
         return response()->json([
-            "data" => Game::all()
+            "data" => $games
         ]);
     }
 
@@ -23,10 +25,12 @@ class GameController extends Controller
             'release_year' => 'required|integer',
             'console_id' => 'required|integer|exists:consoles,id',
             'stock' => 'required|integer',
-            'price' => 'required|integer'
+            'price' => 'required|integer',
+            'genre' => 'required|array',
+            'genre.*' => 'integer|exists:genres,id'
         ]);
 
-        Game::create([
+        $game = Game::create([
             'name' => $request->name,
             'image_path' => $request->file('image')->store('game_images'),
             'description' => $request->description,
@@ -36,6 +40,9 @@ class GameController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
         ]);
+
+        $newGame = Game::find($game->id);
+        $newGame->genres()->attach($request->genre);
 
         return response()->json([
             "data" => [
@@ -53,7 +60,9 @@ class GameController extends Controller
             'release_year' => 'required|integer',
             'console_id' => 'required|integer|exists:consoles,id',
             'stock' => 'required|integer',
-            'price' => 'required|integer'
+            'price' => 'required|integer',
+            'genre' => 'required|array',
+            'genre.*' => 'integer|exists:genres,id'
         ]);
 
         $game = Game::find($id);
@@ -83,6 +92,7 @@ class GameController extends Controller
         }
 
         $game->update($dataRequest);
+        $game->genres()->sync($request->genre);
 
         return response()->json([
             "data" => [

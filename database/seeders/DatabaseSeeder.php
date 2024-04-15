@@ -191,50 +191,12 @@ class DatabaseSeeder extends Seeder
             ],
         ];
         $game_genres = [
-            [
-                "game_id" => 1,
-                "genre_id" => 1
-            ],
-            [
-                "game_id" => 1,
-                "genre_id" => 15
-            ],
-            [
-                "game_id" => 2,
-                "genre_id" => 4
-            ],
-            [
-                "game_id" => 2,
-                "genre_id" => 15
-            ],
-            [
-                "game_id" => 3,
-                "genre_id" => 1
-            ],
-            [
-                "game_id" => 3,
-                "genre_id" => 4
-            ],
-            [
-                "game_id" => 3,
-                "genre_id" => 15
-            ],
-            [
-                "game_id" => 4,
-                "genre_id" => 2
-            ],
-            [
-                "game_id" => 5,
-                "genre_id" => 1
-            ],
-            [
-                "game_id" => 5,
-                "genre_id" => 4
-            ],
-            [
-                "game_id" => 6,
-                "genre_id" => 12
-            ],
+            [1,15],
+            [4,15],
+            [1,4,15],
+            [2],
+            [1,4],
+            [12]
         ];
         
 
@@ -267,8 +229,8 @@ class DatabaseSeeder extends Seeder
                 'price' => $console['price'],
             ]);
         }
-        foreach ($games as $game) {
-            Game::create([
+        foreach ($games as $index => $game) {
+            $newGame = Game::create([
                 'name' => $game['name'],
                 'image_path' => $game['image_path'],
                 'publisher' => $game['publisher'],
@@ -278,12 +240,10 @@ class DatabaseSeeder extends Seeder
                 'stock' => $game['stock'],
                 'price' => $game['price'],
             ]);
-        }
-        foreach ($game_genres as $game_genre) {
-            Game_genre::create([
-                'game_id' => $game_genre['game_id'],
-                'genre_id' => $game_genre['genre_id'],
-            ]);
+        
+            foreach ($game_genres[$index] as $genreId) {
+                $newGame->genres()->attach($genreId);
+            }
         }
     }
 }

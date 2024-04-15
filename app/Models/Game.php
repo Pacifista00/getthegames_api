@@ -13,10 +13,6 @@ class Game extends Model
         'name', 'image_path', 'publisher', 'release_year', 'description', 'console_id', 'stock', 'price'
     ];
 
-    public function genre()
-    {
-        return $this->belongsToMany(Genre::class);
-    }
     public function basket()
     {
         return $this->morphMany(Basket::class, 'product');
@@ -24,5 +20,9 @@ class Game extends Model
     public function console()
     {
         return $this->belongsTo(Console::class);
+    }
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'game_genres')->withTimeStamps();
     }
 }
