@@ -9,7 +9,22 @@ use App\Http\Resources\GameResource;
 
 class GameController extends Controller
 {
-    public function show(){
+    public function show($id){
+        $game = Game::find($id);
+        if (!$game) {
+        return response()->json([
+            "data" => [
+                "message" => "Game not found!"
+                ]
+            ]);
+        }
+        $gameData = new GameResource($game);
+        return response()->json([
+            "data" => $gameData
+        ]);
+    }
+    
+    public function shows(){
         $games = GameResource::collection(Game::all());
         return response()->json([
             "data" => $games
@@ -106,6 +121,7 @@ class GameController extends Controller
 
         if ($game) {
             Storage::delete($game->image_path);
+            $game->genres()->detach();
             $game->delete();
             return response()->json([
                 "data" => [

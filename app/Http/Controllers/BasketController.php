@@ -33,10 +33,13 @@ class BasketController extends Controller
             'quantity' => 'required|integer',
         ]);
 
+        $console = Console::find($request->console_id);
+
         Basket::create([
             'user_id' => $userid,
             'product_id' => $request->console_id,
             'product_type' => Console::class,
+            'image_path' => $console->image_path,
             'quantity' => $request->quantity,
         ]);
 
@@ -54,16 +57,52 @@ class BasketController extends Controller
             'quantity' => 'required|integer',
         ]);
 
+        $game = Game::find($request->game_id);
+
         Basket::create([
             'user_id' => $userid,
             'product_id' => $request->game_id,
             'product_type' => Game::class,
+            'image_path' => $game->image_path,
             'quantity' => $request->quantity,
         ]);
 
         return response()->json([
             "data" => [
                 "message" => "Basket added!"
+            ]
+        ]);
+    }
+    public function basketUpdate(Request $request, $id){
+        $userid = Auth::user()->id;
+        $basket = Basket::find($id);
+        if($userid !== $basket->user_id){
+            return response()->json([
+                "message" => "You are not the owner of the basket!"
+            ]);
+        }
+
+        $request->validate([
+            'quantity' => 'required|integer',
+        ]);
+
+        if(!$basket){
+            return response()->json([
+                "message" => "Basket not found!"
+            ]);
+        }
+
+        $basket->update([
+            'user_id' => $basket->user_id,
+            'product_id' => $basket->product_id,
+            'product_type' => $basket->product_type,
+            'image_path' => $basket->image_path,
+            'quantity' => $request->quantity,
+        ]);
+
+        return response()->json([
+            "data" => [
+                "message" => "Basket updated!"
             ]
         ]);
     }

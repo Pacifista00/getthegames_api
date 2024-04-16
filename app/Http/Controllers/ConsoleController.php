@@ -9,7 +9,22 @@ use App\Http\Resources\ConsoleResource;
 
 class ConsoleController extends Controller
 {
-    public function show(){
+    public function show($id){
+        $console = Console::find($id);
+        if (!$console) {
+        return response()->json([
+            "data" => [
+                "message" => "Console not found!"
+                ]
+            ]);
+        }
+        $consoleData = new ConsoleResource($console);
+        return response()->json([
+            "data" => $consoleData
+        ]);
+    }
+
+    public function shows(){
         $consoles = ConsoleResource::collection(Console::all());
         return response()->json([
             "data" => $consoles

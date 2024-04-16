@@ -41,18 +41,23 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/genre/add', [GenreController::class, 'store']);
         Route::patch('/genre/{id}/update', [GenreController::class, 'update']);
         Route::delete('/genre/{id}/delete', [GenreController::class, 'destroy']);
+
+        // baskets
+        Route::get('/baskets', [BasketController::class, 'show']);
     });
 
     // admin & user
-    Route::get('/consoles', [ConsoleController::class, 'show']);
-    Route::get('/games', [GameController::class, 'show']);
+    Route::get('/console/{id}', [ConsoleController::class, 'show']);
+    Route::get('/consoles', [ConsoleController::class, 'shows']);
+    Route::get('/game/{id}', [GameController::class, 'show']);
+    Route::get('/games', [GameController::class, 'shows']);
     Route::get('/genres', [GenreController::class, 'show']);
     
     // basket
-    Route::get('/baskets', [BasketController::class, 'show']);
-    Route::get('/userbaskets', [BasketController::class, 'showUserBasket']);
+    Route::get('/basket', [BasketController::class, 'showUserBasket']);
     Route::post('/basket/console/add', [BasketController::class, 'consoleStore']);
     Route::post('/basket/game/add', [BasketController::class, 'gameStore']);
+    Route::post('/basket/{id}/update', [BasketController::class, 'basketUpdate']);
     Route::delete('/basket/{id}/delete', [BasketController::class, 'destroy']);
 
     // logout

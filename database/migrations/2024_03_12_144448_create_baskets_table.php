@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('product_id');
             $table->string('product_type');
+            $table->string('image_path');
             $table->integer('quantity');
             $table->timestamps();
         });
