@@ -23,6 +23,13 @@ use App\Http\Controllers\BasketController;
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
 
+// guest
+Route::get('/consoles', [ConsoleController::class, 'shows']);
+Route::get('/games', [GameController::class, 'shows']);
+Route::get('/console/{id}', [ConsoleController::class, 'show']);
+Route::get('/game/{id}', [GameController::class, 'show']);
+Route::get('/genres', [GenreController::class, 'show']);
+
 // logged user
 Route::middleware(['auth:sanctum'])->group(function () {
     // only admin
@@ -46,12 +53,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/baskets', [BasketController::class, 'show']);
     });
 
-    // admin & user
-    Route::get('/console/{id}', [ConsoleController::class, 'show']);
-    Route::get('/consoles', [ConsoleController::class, 'shows']);
-    Route::get('/game/{id}', [GameController::class, 'show']);
-    Route::get('/games', [GameController::class, 'shows']);
-    Route::get('/genres', [GenreController::class, 'show']);
     
     // basket
     Route::get('/basket', [BasketController::class, 'showUserBasket']);

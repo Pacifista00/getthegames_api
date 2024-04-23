@@ -7,22 +7,25 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Basket;
 use App\Models\Game;
 use App\Models\Console;
+use App\Http\Resources\BasketResource;
 
 class BasketController extends Controller
 {
     public function show(){
-        $baskets = Basket::with('product')->get();
+        $basketsData = Basket::with('product')->get();
+
+        $baskets = BasketResource::collection($basketsData);
 
         return response()->json([
             "data" => $baskets
         ]);
     }
     public function showUserBasket(){
-        $userid = Auth::user()->id;
-        $baskets = Basket::with('product')->where('user_id', $userid)->get();
-
+        $userId = Auth::id();
+        $baskets = Basket::with('product')->where('user_id', $userId)->get();
+    
         return response()->json([
-            "data" => $baskets
+            "data" => BasketResource::collection($baskets)
         ]);
     }
     public function consoleStore(Request $request){
