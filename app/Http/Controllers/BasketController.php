@@ -36,15 +36,26 @@ class BasketController extends Controller
             'quantity' => 'required|integer',
         ]);
 
-        $console = Console::find($request->console_id);
+        $existingItem = Basket::where('user_id', $userid)
+                           ->where('product_id', $request->console_id)
+                           ->where('product_type', Console::class)
+                           ->first();
 
-        Basket::create([
-            'user_id' => $userid,
-            'product_id' => $request->console_id,
-            'product_type' => Console::class,
-            'image_path' => $console->image_path,
-            'quantity' => $request->quantity,
-        ]);
+        if ($existingItem) {
+            $existingItem->quantity += $request->quantity;
+            $existingItem->save();
+        }else{
+            $console = Console::find($request->console_id);
+    
+            Basket::create([
+                'user_id' => $userid,
+                'product_id' => $request->console_id,
+                'product_type' => Console::class,
+                'image_path' => $console->image_path,
+                'quantity' => $request->quantity,
+            ]);
+        }
+
 
         return response()->json([
             "data" => [
@@ -60,15 +71,26 @@ class BasketController extends Controller
             'quantity' => 'required|integer',
         ]);
 
-        $game = Game::find($request->game_id);
+        $existingItem = Basket::where('user_id', $userid)
+                           ->where('product_id', $request->game_id)
+                           ->where('product_type', Game::class)
+                           ->first();
 
-        Basket::create([
-            'user_id' => $userid,
-            'product_id' => $request->game_id,
-            'product_type' => Game::class,
-            'image_path' => $game->image_path,
-            'quantity' => $request->quantity,
-        ]);
+        if ($existingItem) {
+            $existingItem->quantity += $request->quantity;
+            $existingItem->save();
+        }else{
+            $game = Game::find($request->game_id);
+    
+            Basket::create([
+                'user_id' => $userid,
+                'product_id' => $request->game_id,
+                'product_type' => Game::class,
+                'image_path' => $game->image_path,
+                'quantity' => $request->quantity,
+            ]);
+        }
+
 
         return response()->json([
             "data" => [
