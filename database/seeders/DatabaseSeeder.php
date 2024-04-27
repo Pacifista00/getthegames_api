@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
             [
                 "name" => "Playstation",
                 "image_path" => "console_images/ps1.webp",
-                "developer" => "Sony",
+                "developer" => "Sony Interactive Entertainment",
                 "release_year" => "1994",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment.",
                 "stock" => 5,
@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
             [
                 "name" => "Playstation 2",
                 "image_path" => "console_images/ps2.webp",
-                "developer" => "Sony",
+                "developer" => "Sony Interactive Entertainment",
                 "release_year" => "2000",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
             [
                 "name" => "Playstation 3",
                 "image_path" => "console_images/ps3.jpg",
-                "developer" => "Sony",
+                "developer" => "Sony Interactive Entertainment",
                 "release_year" => "2006",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
@@ -125,8 +125,17 @@ class DatabaseSeeder extends Seeder
             [
                 "name" => "Playstation 4",
                 "image_path" => "console_images/ps4.jpg",
-                "developer" => "Sony",
+                "developer" => "Sony Interactive Entertainment",
                 "release_year" => "2013",
+                "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
+                "stock" => 5,
+                "price" => 1,
+            ],
+            [
+                "name" => "Playstation 5",
+                "image_path" => "console_images/ps5.webp",
+                "developer" => "Sony Interactive Entertainment",
+                "release_year" => "2020",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
                 "price" => 1,
@@ -193,6 +202,16 @@ class DatabaseSeeder extends Seeder
                 "stock" => 5,
                 "price" => 1,
             ],
+            [
+                "name" => "Tekken 8",
+                "publisher" => "Bandai Namco Entertainment",
+                "image_path" => "game_images/tekken.jpg",
+                "release_year" => "2024",
+                "description" => "Tekken 8 is the eighth main installment in the Tekken series. It is a fighting game developed by Bandai Namco Studios and Arika.",
+                "console_id" => 5,
+                "stock" => 5,
+                "price" => 1,
+            ],
         ];
         $game_genres = [
             [1,15],
@@ -200,7 +219,8 @@ class DatabaseSeeder extends Seeder
             [1,4,15],
             [2],
             [1,4],
-            [12]
+            [12],
+            [9]
         ];
         
 
