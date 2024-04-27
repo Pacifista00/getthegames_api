@@ -28,15 +28,19 @@ class DatabaseSeeder extends Seeder
         ];
         $users = [
             [
+                "name" => "admin",
                 "username" => "admin",
                 "email" => "admin@mail.com",
                 "password" => bcrypt('admin123'),
+                "image_path" => "profile_pictures/profile.jpg",
                 "role_id" => 1,
             ],
             [
+                "name" => "user",
                 "username" => "user",
                 "email" => "user@mail.com",
                 "password" => bcrypt('user123'),
+                "image_path" => "profile_pictures/profile.jpg",
                 "role_id" => 2,
             ],
         ];
@@ -207,9 +211,11 @@ class DatabaseSeeder extends Seeder
         }
         foreach ($users as $user) {
             User::create([
+                'name' => $user['name'],
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'password' => $user['password'],
+                'image_path' => $user['image_path'],
                 'role_id' => $user['role_id'],
             ]);
         }

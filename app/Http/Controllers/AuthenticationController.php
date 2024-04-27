@@ -11,7 +11,7 @@ class AuthenticationController extends Controller
     public function register(Request $request){
         $request->validate([
             'username' => 'required|unique:users|max:24',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
             'password_confirm' => 'required|same:password'
         ]);
@@ -20,6 +20,7 @@ class AuthenticationController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'image_path' => "profile_pictures/profile.jpg",
             'role_id' => 2,
         ]);
 

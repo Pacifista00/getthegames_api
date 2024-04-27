@@ -7,6 +7,7 @@ use App\Http\Controllers\ConsoleController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
 
 // guest
+Route::get('/users', [UserController::class, 'shows']);
+Route::get('/user/{id}', [UserController::class, 'show']);
 Route::get('/consoles', [ConsoleController::class, 'shows']);
 Route::get('/games', [GameController::class, 'shows']);
 Route::get('/console/{id}', [ConsoleController::class, 'show']);
@@ -34,6 +37,7 @@ Route::get('/genres', [GenreController::class, 'show']);
 Route::middleware(['auth:sanctum'])->group(function () {
     // only admin
     Route::middleware(['admin'])->group(function () {
+
         // console
         Route::post('/console/add', [ConsoleController::class, 'store']);
         Route::post('/console/{id}/update', [ConsoleController::class, 'update']);
@@ -53,6 +57,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/baskets', [BasketController::class, 'show']);
     });
 
+    //user
+    Route::post('/user/{id}/update', [UserController::class, 'update']);
+    Route::delete('/user/{id}/delete', [UserController::class, 'destroy']);
     
     // basket
     Route::get('/basket', [BasketController::class, 'showUserBasket']);
