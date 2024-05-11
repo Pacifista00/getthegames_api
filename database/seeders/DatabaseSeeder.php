@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
                 "release_year" => "1994",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment.",
                 "stock" => 5,
-                "price" => 1,
+                "price" => 200000,
             ],
             [
                 "name" => "Playstation 2",
@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
                 "release_year" => "2000",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
-                "price" => 1,
+                "price" => 350000,
             ],
             [
                 "name" => "Playstation 3",
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
                 "release_year" => "2006",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
-                "price" => 1,
+                "price" => 1000000,
             ],
             [
                 "name" => "Playstation 4",
@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
                 "release_year" => "2013",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
-                "price" => 1,
+                "price" => 3000000,
             ],
             [
                 "name" => "Playstation 5",
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
                 "release_year" => "2020",
                 "description" => "The PlayStation is a home video game console developed and marketed by Sony Interactive Entertainment.",
                 "stock" => 5,
-                "price" => 1,
+                "price" => 6000000,
             ],
         ];
         $games = [
@@ -150,7 +150,7 @@ class DatabaseSeeder extends Seeder
                 "description" => "Crash Bandicoot is a video game series, originally developed by Naughty Dog as an exclusive game for the Sony PlayStation console.",
                 "console_id" => 1,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 50000,
             ],
             [
                 "name" => "Sengoku Basara 2 Heroes",
@@ -160,7 +160,7 @@ class DatabaseSeeder extends Seeder
                 "description" => "Sengoku Basara 2 is the sequel to the first Sengoku Basara game. First released by Capcom for the PlayStation 2 on 27 July 2006.",
                 "console_id" => 2,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 75000,
             ],
             [
                 "name" => "God of War 3",
@@ -170,7 +170,7 @@ class DatabaseSeeder extends Seeder
                 "description" => "God of War III is the fifth installment in the God of War series, released on March 16, 2010 for the PlayStation 3.",
                 "console_id" => 3,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 100000,
             ],
             [
                 "name" => "Grand Turismo 7",
@@ -180,7 +180,7 @@ class DatabaseSeeder extends Seeder
                 "description" => "Gran Turismo 7 is a racing video game developed by Polyphony Digital and published by Sony Interactive Entertainment.",
                 "console_id" => 4,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 300000,
             ],
             [
                 "name" => "Red Dead Redemption 2",
@@ -190,7 +190,7 @@ class DatabaseSeeder extends Seeder
                 "description" => "Red Dead Redemption 2 (stylized as Red Dead Redemption II) is a western-themed action-adventure video game developed and published by Rockstar Games.",
                 "console_id" => 4,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 400000,
             ],
             [
                 "name" => "FIFA 2",
@@ -200,7 +200,7 @@ class DatabaseSeeder extends Seeder
                 "description" => "FIFA 22 is a football simulation video game published by Electronic Arts. It is the 29th installment in the FIFA series, and was released worldwide on 1 October 2021.",
                 "console_id" => 4,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 400000,
             ],
             [
                 "name" => "Tekken 8",
@@ -210,7 +210,17 @@ class DatabaseSeeder extends Seeder
                 "description" => "Tekken 8 is the eighth main installment in the Tekken series. It is a fighting game developed by Bandai Namco Studios and Arika.",
                 "console_id" => 5,
                 "stock" => 5,
-                "price" => 1,
+                "price" => 700000,
+            ],
+            [
+                "name" => "Naruto Shippuden Ultimate Ninja Storm 3",
+                "publisher" => "Bandai Namco Entertainment",
+                "image_path" => "game_images/naruto.jpg",
+                "release_year" => "2013",
+                "description" => "The story focuses on the conflict between ninjas from all the villages and the terrorist organization known as Akatsuki as a world war starts between the groups. Its gameplay retains elements of Ultimate Ninja Storm 2.",
+                "console_id" => 3,
+                "stock" => 5,
+                "price" => 300000,
             ],
         ];
         $game_genres = [
@@ -220,7 +230,9 @@ class DatabaseSeeder extends Seeder
             [2],
             [1,4],
             [12],
-            [9]
+            [9],
+            [9,15]
+
         ];
         
 

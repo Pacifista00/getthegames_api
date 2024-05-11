@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function showUser(){
+        $user = new UserResource(User::find(Auth::user()->id));
+        return response()->json([
+            "data" => $user
+        ]);
+    }
     public function shows(){
         $users = UserResource::collection(User::all());
         return response()->json([
@@ -58,7 +64,8 @@ class UserController extends Controller
                     Storage::delete($previousImagePath);
                 }
                 $dataRequest['image_path'] = $request->file('image')->store('profile_pictures');
-            }else if($request->has('bio')){
+            }
+            if($request->has('bio')){
                 $dataRequest['bio'] = $request->bio;
             }
 

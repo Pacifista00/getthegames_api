@@ -8,6 +8,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,15 @@ Route::get('/console/{id}', [ConsoleController::class, 'show']);
 Route::get('/game/{id}', [GameController::class, 'show']);
 Route::get('/genres', [GenreController::class, 'show']);
 
+//Midtrans
+Route::post('/handleNotification', [OrderController::class, 'handleNotification']);
+
 // logged user
 Route::middleware(['auth:sanctum'])->group(function () {
     // only admin
     Route::middleware(['admin'])->group(function () {
+        //user
+        Route::get('/user', [UserController::class, 'showUser']);
 
         // console
         Route::post('/console/add', [ConsoleController::class, 'store']);
@@ -67,6 +73,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/basket/game/add', [BasketController::class, 'gameStore']);
     Route::post('/basket/{id}/update', [BasketController::class, 'basketUpdate']);
     Route::delete('/basket/{id}/delete', [BasketController::class, 'destroy']);
+
+    //midtrans
+    Route::post('/checkout', [OrderController::class, 'checkout']);
 
     // logout
     Route::post('/logout', [AuthenticationController::class, 'logout']);
