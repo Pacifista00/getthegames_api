@@ -16,6 +16,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::create([
+            'transaction_id' => rand(),
             'name' => $request->name,
             'email' => $request->email,
             'amount' => $request->amount,
@@ -30,7 +31,7 @@ class OrderController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $order->id,
+                'order_id' => $order->transaction_id,
                 'gross_amount' => $request->amount,
             ),
             'customer_details' => array(
@@ -61,7 +62,7 @@ class OrderController extends Controller
             ]);
         }
 
-        $order= Order::find($orderId);
+        $order= Order::where('transaction_id', $orderId);
         if(!$order){
             return response()->json([
                 "message" => "invalid Order!"
@@ -72,13 +73,13 @@ class OrderController extends Controller
             $order->update([
                 'status' => 'paid'
             ]);
-        }else if($status == 'settlement'){
-            $order->update([
-                'status' => 'paid'
-            ]);
         }else if($status == 'expire'){
             $order->update([
                 'status' => 'expired'
+            ]);
+        }else if($status == 'cancel'){
+            $order->update([
+                'status' => 'cancel'
             ]);
         }
     }

@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/basket/game/add', [BasketController::class, 'gameStore']);
     Route::post('/basket/{id}/update', [BasketController::class, 'basketUpdate']);
     Route::delete('/basket/{id}/delete', [BasketController::class, 'destroy']);
+    Route::delete('/basket/deletes', [BasketController::class, 'destroyAll']);
 
     //midtrans
     Route::post('/checkout', [OrderController::class, 'checkout']);

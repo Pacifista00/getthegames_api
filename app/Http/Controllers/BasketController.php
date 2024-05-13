@@ -158,4 +158,26 @@ class BasketController extends Controller
             ]);
         }
     }
+    public function destroyAll(){
+        $userId = Auth::user()->id;
+        $baskets = Basket::where('user_id', $userId)->get();
+
+        if(!$baskets){
+            return response()->json([
+                "data" => [
+                    "message" => "You are not the owner of the baskets!"
+                ]
+            ]);
+        }
+
+        foreach ($baskets as $basket) {
+            $basket->delete();
+        }
+    
+        return response()->json([
+            "data" => [
+                "message" => "Baskets deleted!"
+            ]
+        ]);
+    }
 }
